@@ -31,26 +31,8 @@ When we put a type in a "box", type inference improves on calls later.
 --
 terminal examples (lets look at things in boxes)
 
-
-# It's all about .......
-
-Once you accept your flaws noone can use them against you. 
-who wrote it:
-a. Herman Riel (Nazi)
-b. Malcolm X
-c. George R. R. Martin.
-
 ---
 
-# It's all about context
-
-Once you accept your flaws noone can use them against you. 
-who wrote it:
-a. Herman Riel (Nazi)
-b. Malcolm X
-c. George R. R. Martin.
-
----
 
 # Postpone implementation and reuse
 Lets look at some common cases
@@ -68,13 +50,14 @@ object Writer {
 --
 ``` scala
 sealed trait Writer( 
-    def write(ident: Identifiable) : Unit
-    val path : String )
+    def write(ident: Identifiable) 
+    val path : String) : Unit
 case class S3Writer(....) extends Writer
 case class DiskWriter(....) extends Writer
 
 ```
 ---
+
 # Traits all over the place
 ``` scala
 def moveAnimals(animals: List[Identifiable], writer : Writer) = ???
@@ -88,32 +71,86 @@ def moveAnimals(animals: List[Identifiable]) = {
     WriterFactory.get("ehm s3 or disk????")
 }
 ```
--- 
-``` scala
-def moveAnimals(animals: List[Identifiable])(implicit writer: Writer) = ???
-```
+
+
 ---
+
+
+# It's all about .......
+
+Once you accept your flaws noone can use them against you. 
+  
+who wrote it:  
+
+--
+
+ - Heinrich Himmler (Nazi)
+
+--
+
+ - Malcolm X
+
+--
+
+ - George R. R. Martin.
+
+---
+
+
+
 # Where do we use context
-- Configuration
-- Behavior
-- Extension types
+- Configuration (Logging, IO, Libraries)
+- Environments (Test, Staging, Production)
+- Session Scope (http, database)
+- Types (But more often label & names)
+
+---
 
 # How do we set them
-Java ,  Spring, Guice dependency injection
-Scala, implicits
-loads of examples here
+Java: 
+- Spring
+- Guice 
+- Dependency injection
 
 
+Scala: 
+- implicits
+- Dependency injection
+
+
+---
+
+# Implicits theme of the day
+
+``` scala
+def moveAnimals(animals: List[Identifiable])(`implicit` writer: Writer) = ???
+```
+--
+Where did the writer come from???
+``` scala
+def main() ...
+  `implicit` val global_writer = DiskWriter()
+```
+
+
+
+
+---
 
 # Exercise 1 (Wire it up)
 munit + sbt_console
 
 wire up some code such that tests pass
 
+--- 
+
 # Creating a console serializer 
 (hands on scala chap 5)
 
+---
+
 # Pros & Cons about implicits
+The price of a few extra parameters.
 compile time
 performance
 warts, changes in scala 3
@@ -123,8 +160,8 @@ type conversions
 
 
 </textarea>
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
-    </script>
+<script src="remark-latest.min.js">
+</script>
 <script>
   var slideshow = remark.create({
         highlightStyle: 'ir-black',
