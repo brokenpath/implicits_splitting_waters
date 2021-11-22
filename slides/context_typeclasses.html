@@ -132,20 +132,43 @@ def main() ...
   `implicit` val global_writer = DiskWriter()
 ```
 
+--
+<br/>
+There can only be one [implicit scope]
 
+--
+
+<br/>
+Getting implicits
+``` scala
+import trala.someobject.implicits._
+
+```
+---
+# Honorable mentions
+
+Extend with extra function  
+
+Convert one type to another to make things fit
 
 
 ---
-
 # Exercise 1 (Wire it up)
-munit + sbt_console
+Wire up some code such that tests pass  
+Find the code here..  
 
-wire up some code such that tests pass
-
---- 
-
+---
 # Creating a console serializer 
 (hands on scala chap 5)
+``` scala
+
+def parseFromString[T](s: String): T = ???
+val args = Seq("123", "true", "7.5")
+val myInt = parseFromString[Int](args(0))
+val myBoolean = parseFromString[Boolean](args(1))
+val myDouble = parseFromString[Double](args(2))
+
+```
 
 ---
 
